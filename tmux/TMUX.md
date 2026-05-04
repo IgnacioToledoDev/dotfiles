@@ -21,8 +21,8 @@
 
 | Atajo | Acción |
 |-------|--------|
-| `prefix` + `\|` | Dividir panel **horizontal** (izquierda / derecha) |
-| `prefix` + `-` | Dividir panel **vertical** (arriba / abajo) |
+| `prefix` + `v` | Dividir panel **horizontal** (izquierda / derecha) — hereda directorio actual |
+| `prefix` + `d` | Dividir panel **vertical** (arriba / abajo) — hereda directorio actual |
 
 ### Navegar entre paneles
 
@@ -86,14 +86,74 @@ Navegación estilo Vim activada en modo copia.
 
 ---
 
+## Plugins
+
+Gestor: **TPM** (Tmux Plugin Manager).
+
+| Plugin | Descripción |
+|--------|-------------|
+| [tmux-kanagawa](https://github.com/Nybkox/tmux-kanagawa) | Tema visual + barra de estado con widgets |
+
+### Widgets activos en la barra (kanagawa)
+
+| Widget | Muestra |
+|--------|---------|
+| `git` | Rama actual del directorio |
+| `cpu-usage` | % uso de CPU |
+| `ram-usage` | % uso de RAM |
+
+Tema configurado: `dragon`.
+
+---
+
+## Instalación tras clonar el repo
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/IgnacioToledoDev/dotfiles ~/.dotfiles
+```
+
+### 2. Enlazar la config
+
+```bash
+ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
+```
+
+### 3. Instalar TPM
+
+TPM está incluido como submodule en `tmux/plugins/tpm`. Si el directorio está vacío al clonar:
+
+```bash
+git -C ~/.dotfiles submodule update --init --recursive
+```
+
+O instalar TPM manualmente:
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+### 4. Instalar plugins
+
+Abrir tmux y ejecutar:
+
+```
+prefix + I
+```
+
+> `prefix` = `Ctrl+a`. TPM descarga e instala todos los plugins definidos en `.tmux.conf`.
+
+---
+
 ## Referencia rápida
 
 ```
 Ctrl+a  →  prefijo
 
 Paneles:
-  |   dividir horizontal
-  -   dividir vertical
+  v   dividir horizontal (hereda path)
+  d   dividir vertical (hereda path)
   h/j/k/l   navegar (vim)
   H/J/K/L   redimensionar
   m   zoom toggle
