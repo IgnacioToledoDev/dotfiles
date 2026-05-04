@@ -1,5 +1,7 @@
 # TMUX - Configuración Custom
 
+> Repo: [IgnacioToledoDev/dotfiles](https://github.com/IgnacioToledoDev/dotfiles) — config en `tmux/.tmux.conf`
+
 > Prefijo por defecto de tmux (`Ctrl+b`) reemplazado por **`Ctrl+a`**.
 > En esta guía, `prefix` = `Ctrl+a`.
 
