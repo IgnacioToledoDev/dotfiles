@@ -8,7 +8,7 @@ Configuraciones personales para el entorno de desarrollo.
 |-------------|-------------|------|
 | [tmux](./tmux/.tmux.conf) | Multiplexor de terminal | [TMUX.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/tmux/TMUX.md) · [PLUGINS.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/tmux/plugins/PLUGINS.md) |
 | [zsh](./zsh/.zshrc) | Shell con Oh My Zsh + Powerlevel10k | [ZSH.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/zsh/ZSH.md) |
-| nvim | Editor Neovim | Próximamente |
+| [nvim](./nvim/init.lua) | Editor Neovim con LazyVim | [README.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/nvim/README.md) · [SHORTCUTS.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/nvim/Shortcuts.md) · [DEV_TRICKS.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/nvim/DEV_TRICKS.md) |
 
 ## Uso
 
@@ -65,3 +65,21 @@ source ~/.zshrc
 ```
 
 Ver [ZSH.md](./zsh/ZSH.md) para la guía completa de instalación y referencia de la configuración.
+
+### nvim
+
+**1. Enlazar la config**
+
+```bash
+ln -s ~/dotfiles/nvim ~/.config/nvim
+```
+
+**2. Abrir Neovim**
+
+LazyVim instalará todos los plugins automáticamente en el primer arranque.
+
+```bash
+nvim
+```
+
+Ver [nvim/README.md](./nvim/README.md) para la lista de plugins, extras LazyVim y atajos de teclado.
