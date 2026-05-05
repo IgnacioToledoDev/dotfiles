@@ -15,7 +15,55 @@
 
 ---
 
+## Windows (Ventanas)
+
+> Numeración empieza en **1** (`base-index 1`). Al cerrar una ventana, se renumeran automáticamente (`renumber-windows on`).
+
+### Gestión
+
+| Atajo | Acción |
+|-------|--------|
+| `prefix` + `c` | Crear ventana nueva |
+| `prefix` + `,` | Renombrar ventana actual |
+| `prefix` + `&` | Cerrar ventana actual (pide confirmación) |
+
+### Navegar entre ventanas
+
+| Atajo | Acción |
+|-------|--------|
+| `prefix` + `n` | Ventana **siguiente** |
+| `prefix` + `p` | Ventana **anterior** |
+| `prefix` + `[1-9]` | Ir a ventana por número |
+| `prefix` + `w` | Lista interactiva de ventanas |
+
+---
+
+## Sesiones
+
+### Gestión desde terminal
+
+```bash
+tmux new -s <nombre>       # nueva sesión con nombre
+tmux ls                    # listar sesiones activas
+tmux attach -t <nombre>    # reconectar a sesión existente
+tmux kill-session -t <nombre>  # eliminar sesión
+```
+
+### Recuperar sesión desde dentro de tmux
+
+| Atajo | Acción |
+|-------|--------|
+| `prefix` + `d` | Desconectarse (detach) — sesión sigue corriendo |
+| `prefix` + `s` | Lista interactiva de sesiones (cambiar o reconectar) |
+| `prefix` + `$` | Renombrar sesión actual |
+
+> Las sesiones persisten mientras el proceso tmux esté vivo. Al reconectar: `tmux attach` (última sesión) o `tmux attach -t <nombre>`.
+
+---
+
 ## Paneles
+
+> Numeración empieza en **1** (`pane-base-index 1`).
 
 ### Dividir pantalla
 
@@ -151,7 +199,21 @@ prefix + I
 ```
 Ctrl+a  →  prefijo
 
-Paneles:
+Sesiones:
+  tmux new -s <nombre>      nueva sesión
+  tmux attach -t <nombre>   reconectar
+  tmux ls                   listar
+  prefix+d   detach (sesión sigue viva)
+  prefix+s   lista interactiva de sesiones
+  prefix+$   renombrar sesión
+
+Ventanas  (inician en 1, se renumeran al cerrar):
+  c   nueva ventana
+  ,   renombrar
+  n/p navegar siguiente/anterior
+  1-9 ir a número
+
+Paneles  (inician en 1):
   v   dividir horizontal (hereda path)
   d   dividir vertical (hereda path)
   h/j/k/l   navegar (vim)
