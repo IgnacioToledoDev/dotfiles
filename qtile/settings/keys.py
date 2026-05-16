@@ -25,6 +25,9 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # Toggle floating
     ([mod, "shift"], "f", lazy.window.toggle_floating()),
 
+    # Toggle maximize / restore
+    ([mod, "shift"], "m", lazy.window.toggle_maximize()),
+
     # Move windows up or down in current stack
     ([mod, "shift"], "j", lazy.layout.shuffle_down()),
     ([mod, "shift"], "k", lazy.layout.shuffle_up()),
@@ -55,7 +58,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod], "m", lazy.spawn("rofi -show drun")),
 
     # Window Nav
-    ([mod, "shift"], "m", lazy.spawn("rofi -show")),
+    ([mod, "shift"], "w", lazy.spawn("rofi -show")),
 
     # Browser
     ([mod], "b", lazy.spawn("firefox")),
