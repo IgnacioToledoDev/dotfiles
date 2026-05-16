@@ -1,85 +1,120 @@
 # dotfiles
 
-Configuraciones personales para el entorno de desarrollo.
+Configuraciones personales para el entorno de desarrollo en Arch Linux.
 
 ## Contenido
 
 | Herramienta | Descripción | Docs |
 |-------------|-------------|------|
-| [tmux](./tmux/.tmux.conf) | Multiplexor de terminal | [TMUX.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/tmux/TMUX.md) · [PLUGINS.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/tmux/plugins/PLUGINS.md) |
-| [zsh](./zsh/.zshrc) | Shell con Oh My Zsh + Powerlevel10k | [ZSH.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/zsh/ZSH.md) |
-| [nvim](./nvim/init.lua) | Editor Neovim con LazyVim | [README.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/nvim/README.md) · [SHORTCUTS.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/nvim/Shortcuts.md) · [DEV_TRICKS.md](https://github.com/IgnacioToledoDev/dotfiles/blob/main/nvim/DEV_TRICKS.md) |
+| [alacritty](./alacritty/alacritty.toml) | Terminal con tema Ayu Dark y JetBrainsMono | — |
+| [qtile](./qtile/config.py) | Window manager con barra personalizada y múltiples temas | [README.md](./qtile/README.md) |
+| [nvim](./nvim/init.lua) | Editor Neovim con LazyVim y tema Ayu Dark | [README.md](./nvim/README.md) · [Shortcuts.md](./nvim/Shortcuts.md) |
+| [tmux](./tmux/.tmux.conf) | Multiplexor de terminal con TPM | [TMUX.md](./tmux/TMUX.md) |
+| [zsh](./zsh/.zshrc) | Shell con Oh My Zsh, Powerlevel10k y agente SSH | [ZSH.md](./zsh/ZSH.md) |
+| [wallpapers](./wallpapers/) | Fondos de pantalla del escritorio | — |
 
-## Uso
+## Instalación
 
-Clona el repo y enlaza (symlink) los archivos que necesites a sus ubicaciones correspondientes.
+Clona el repo:
 
 ```bash
 git clone git@github.com:IgnacioToledoDev/dotfiles.git ~/dotfiles
 ```
 
-### tmux
+Luego enlaza (symlink) cada config a su ubicación correspondiente.
 
-**1. Enlazar la config**
+---
 
-```bash
-ln -s ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
-```
-
-**2. Instalar TPM (gestor de plugins)**
-
-TPM viene como submodule. Inicializarlo con:
+### alacritty
 
 ```bash
-git -C ~/dotfiles submodule update --init --recursive
+mkdir -p ~/.config/alacritty
+ln -s ~/dotfiles/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 ```
 
-O clonarlo manualmente:
+Tema **Ayu Dark** con fuente **JetBrainsMono Nerd Font Bold** (tamaño 10.5) y opacidad de ventana al 70%.
+
+---
+
+### qtile
+
+**Dependencias (Arch):**
 
 ```bash
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+sudo pacman -S qtile swaybg cbatticon volumeicon playerctl
+yay -S nerd-fonts-ubuntu-mono
+pip install psutil
 ```
 
-**3. Instalar los plugins**
-
-Abrir tmux y ejecutar `prefix + I` (`Ctrl+a` + `I`). TPM descarga e instala todos los plugins definidos en `.tmux.conf`.
-
-### zsh
-
-**1. Enlazar la config**
+**Enlazar la config:**
 
 ```bash
-ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
+ln -s ~/dotfiles/qtile ~/.config/qtile
 ```
 
-**2. Instalar dependencias**
+**Wallpaper:** el script `autostart.sh` carga el fondo con `swaybg`. Actualiza la ruta en ese archivo si guardas el wallpaper en un lugar distinto:
 
 ```bash
-brew install powerlevel10k zsh-syntax-highlighting
+# qtile/autostart.sh
+swaybg -i ~/dotfiles/wallpapers/background.jpeg -m fill &
 ```
 
-**3. Recargar la shell**
+**Cambiar tema:** edita `qtile/config.json` con el nombre de cualquier tema de `qtile/themes/`:
 
-```bash
-source ~/.zshrc
+```json
+{ "theme": "ayu" }
 ```
 
-Ver [ZSH.md](./zsh/ZSH.md) para la guía completa de instalación y referencia de la configuración.
+Temas disponibles: `ayu`, `dracula`, `nord`, `nord-wave`, `onedark`, `rosepine`, `material-ocean`, `material-darker`, `monokai-pro`, `dark-grey`.
+
+---
 
 ### nvim
-
-**1. Enlazar la config**
 
 ```bash
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ```
 
-**2. Abrir Neovim**
-
-LazyVim instalará todos los plugins automáticamente en el primer arranque.
+LazyVim instala todos los plugins automáticamente en el primer arranque. El tema activo es **Ayu Dark**, coherente con Alacritty y Qtile.
 
 ```bash
 nvim
 ```
 
-Ver [nvim/README.md](./nvim/README.md) para la lista de plugins, extras LazyVim y atajos de teclado.
+---
+
+### tmux
+
+**Enlazar la config:**
+
+```bash
+ln -s ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
+```
+
+**Inicializar TPM** (viene como submódulo):
+
+```bash
+git -C ~/dotfiles submodule update --init --recursive
+```
+
+**Instalar plugins:** abrir tmux y ejecutar `prefix + I` (`Ctrl+a I`).
+
+---
+
+### zsh
+
+**Dependencias (Arch):**
+
+```bash
+sudo pacman -S zsh
+yay -S oh-my-zsh-git powerlevel10k zsh-syntax-highlighting
+```
+
+**Enlazar la config:**
+
+```bash
+ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
+source ~/.zshrc
+```
+
+El archivo incluye arranque automático del agente SSH para autenticación con GitHub. Requiere tener una clave en `~/.ssh/id_ed25519`.
