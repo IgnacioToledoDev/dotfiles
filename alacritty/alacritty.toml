@@ -30,7 +30,7 @@ white = "#FFFFFF"
 size = 10.5
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "FiraCode Nerd Font"
 style = "bold"
 
 [window]
