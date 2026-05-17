@@ -2,6 +2,8 @@
 
 Configuraciones personales para el entorno de desarrollo en Arch Linux.
 
+![Qtile](.screenshots/qtile-view.png)
+
 ## Contenido
 
 | Herramienta | Descripción | Docs |
