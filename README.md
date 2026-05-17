@@ -4,6 +4,8 @@ Configuraciones personales para el entorno de desarrollo en Arch Linux.
 
 ![Qtile](.screenshots/qtile-view.png)
 
+![Qtile Fastfetch](.screenshots/qtile-fastfetch.png)
+
 ## Contenido
 
 | Herramienta | Descripción | Docs |
