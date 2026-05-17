@@ -7,6 +7,7 @@ Configuraciones personales para el entorno de desarrollo en Arch Linux.
 | Herramienta | Descripción | Docs |
 |-------------|-------------|------|
 | [alacritty](./alacritty/alacritty.toml) | Terminal con tema Ayu Dark y JetBrainsMono | — |
+| [fastfetch](./fastfetch/config.jsonc) | System info con ASCII art y colores Catppuccin | [README.md](./fastfetch/README.md) |
 | [qtile](./qtile/config.py) | Window manager con barra personalizada y múltiples temas | [README.md](./qtile/README.md) |
 | [nvim](./nvim/init.lua) | Editor Neovim con LazyVim y tema Ayu Dark | [README.md](./nvim/README.md) · [Shortcuts.md](./nvim/Shortcuts.md) |
 | [tmux](./tmux/.tmux.conf) | Multiplexor de terminal con TPM | [TMUX.md](./tmux/TMUX.md) |
@@ -21,7 +22,23 @@ Clona el repo:
 git clone git@github.com:IgnacioToledoDev/dotfiles.git ~/dotfiles
 ```
 
-Luego enlaza (symlink) cada config a su ubicación correspondiente.
+Luego copia la carpeta del módulo que necesites a su ubicación correspondiente.
+
+---
+
+### fastfetch
+
+**Dependencias (Arch):**
+
+```bash
+sudo pacman -S fastfetch
+```
+
+**Copiar la carpeta:**
+
+```bash
+cp -r ~/dotfiles/fastfetch ~/.config/fastfetch
+```
 
 ---
 
