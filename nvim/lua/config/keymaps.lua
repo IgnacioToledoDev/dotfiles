@@ -14,6 +14,9 @@ keymap.set("n", "<leader>fv", function()
     end
 end, { desc = "Terminal Vertical (Derecha)" })
 
+-- Cerrar buffer actual
+keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Cerrar buffer" })
+
 -- Salir del modo terminal con Esc
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Escape terminal mode" })
 

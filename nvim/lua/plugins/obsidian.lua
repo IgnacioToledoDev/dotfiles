@@ -4,8 +4,17 @@ return {
     version = "*",
     lazy = true,
     ft = "markdown",
+    keys = {
+      { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },
+      { "<leader>oo", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick switch" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search vault" },
+      { "<leader>ot", "<cmd>ObsidianToday<cr>", desc = "Today's note" },
+      { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
+      { "<leader>or", "<cmd>ObsidianRename<cr>", desc = "Rename note" },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-mini/mini.pick",
     },
     opts = {
       workspaces = {
@@ -16,8 +25,11 @@ return {
       },
       notes_subdir = "notas",
       new_notes_location = "notes_subdir",
+      picker = {
+        name = "mini",
+      },
       completion = {
-        nvim_cmp = true,
+        nvim_cmp = false,
         min_chars = 2,
       },
       mappings = {
