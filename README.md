@@ -11,6 +11,7 @@ Configuraciones personales para el entorno de desarrollo en Arch Linux.
 | Herramienta | Descripción | Docs |
 |-------------|-------------|------|
 | [alacritty](./alacritty/alacritty.toml) | Terminal con tema Ayu Dark y JetBrainsMono | — |
+| [claude](./claude/settings.json) | Claude Code CLI — plugins caveman, superpowers y frontend-design | [README.md](./claude/README.md) |
 | [fastfetch](./fastfetch/config.jsonc) | System info con ASCII art y colores Catppuccin | [README.md](./fastfetch/README.md) |
 | [qtile](./qtile/config.py) | Window manager con barra personalizada y múltiples temas | [README.md](./qtile/README.md) |
 | [nvim](./nvim/init.lua) | Editor Neovim con LazyVim y tema Ayu Dark | [README.md](./nvim/README.md) · [Shortcuts.md](./nvim/Shortcuts.md) |
@@ -119,6 +120,23 @@ git -C ~/dotfiles submodule update --init --recursive
 ```
 
 **Instalar plugins:** abrir tmux y ejecutar `prefix + I` (`Ctrl+a I`).
+
+---
+
+### claude
+
+**Dependencias:**
+
+- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code)
+- [mise](https://mise.jdx.dev/) con Node.js ≥ 18
+
+**Instalar:**
+
+```bash
+bash ~/dotfiles/claude/install.sh
+```
+
+Ver [claude/README.md](./claude/README.md) para más detalles.
 
 ---
 
