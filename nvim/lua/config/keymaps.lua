@@ -25,3 +25,6 @@ vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { desc = "Move left" })
 vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "Move down" })
 vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { desc = "Move up" })
 vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "Move right" })
+
+-- Markdown Preview
+keymap.set("n", "<leader>mr", "<cmd>MarkdownPreview<cr>", { desc = "Markdown Preview" })
