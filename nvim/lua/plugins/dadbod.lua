@@ -62,7 +62,10 @@ end
 
 -- Start SSH tunnel for server, then call callback() after 600ms.
 local function start_tunnel(server, callback)
-  kill_tunnel(server.name)
+  -- Kill all active tunnels — only one port (5433) is available.
+  for name, _ in pairs(active_tunnels) do
+    kill_tunnel(name)
+  end
 
   local args = {
     "ssh", "-N",
@@ -79,7 +82,7 @@ local function start_tunnel(server, callback)
 
   table.insert(args, server.ssh_user .. "@" .. server.ssh_host)
 
-  active_tunnels[server.name] = vim.fn.jobstart(args, {
+  local job_id = vim.fn.jobstart(args, {
     on_stderr = function(_, data)
       if data and data[1] ~= "" then
         vim.schedule(function()
@@ -89,6 +92,12 @@ local function start_tunnel(server, callback)
     end,
   })
 
+  if job_id <= 0 then
+    vim.notify("[dadbod] Failed to start SSH tunnel (job_id=" .. job_id .. "). Is ssh in PATH?", vim.log.levels.ERROR)
+    return
+  end
+
+  active_tunnels[server.name] = job_id
   vim.defer_fn(callback, 600)
 end
 
@@ -132,7 +141,7 @@ local function connect(server)
       open_dbui(server, "127.0.0.1", TUNNEL_PORT, password)
     end)
   else
-    open_dbui(server, "127.0.0.1", server.db_port, password)
+    open_dbui(server, server.db_host or "127.0.0.1", server.db_port, password)
   end
 end
 
