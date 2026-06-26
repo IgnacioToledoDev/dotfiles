@@ -1,0 +1,5 @@
+# Neovim DB secrets (contains plaintext passwords, never commit)
+nvim/.db-secrets.json
+
+# Superpowers planning docs (generated, not for version control)
+nvim/docs/superpowers/
