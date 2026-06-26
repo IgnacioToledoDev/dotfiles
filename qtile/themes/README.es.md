@@ -1,10 +1,10 @@
-# Qtile Themes
+# Temas de Qtile
 
-***Language***
-- 🇺🇸 English
-- [🇪🇸 Español](./README.es.md)
+***Idioma***
+- [🇺🇸 English](./README.md)
+- 🇪🇸 Español
 
-A theme consists of a simple json file. You can create your own by copying this json object and changing values:
+Un tema consiste en un archivo json simple. Puedes crear el tuyo propio copiando este objeto json y cambiando los valores:
 
 ```json
 {

@@ -1,272 +1,276 @@
-# Neovim — Trucos para Desarrolladores
+# Neovim — Developer Tricks
 
-> Complemento de `SHORTCUTS.md`. Enfoque en productividad real.
+> Complement to `Shortcuts.md`. Focused on real-world productivity.
 
----
-
-## Macros — Automatizar repetición
-
-| Atajo | Acción |
-|-------|--------|
-| `qa` | Grabar macro en registro `a` |
-| `q` | Detener grabación |
-| `@a` | Ejecutar macro `a` |
-| `@@` | Repetir último macro |
-| `10@a` | Ejecutar macro `a` 10 veces |
-
-> **Truco:** Selecciona 50 líneas en visual, luego `:norm @a` — ejecuta el macro en cada línea.
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./DEV_TRICKS.es.md)
 
 ---
 
-## Text Objects — Editar bloques precisos
+## Macros — Automate Repetition
 
-Formato: `[operación][i/a][objeto]` — `i` = inner (sin delimitador), `a` = around (con delimitador).
+| Shortcut | Action |
+|----------|--------|
+| `qa` | Record macro to register `a` |
+| `q` | Stop recording |
+| `@a` | Run macro `a` |
+| `@@` | Repeat last macro |
+| `10@a` | Run macro `a` 10 times |
 
-| Atajo | Acción |
-|-------|--------|
-| `ciw` | Cambiar palabra |
-| `ci"` / `ci'` / `` ci` `` | Cambiar contenido de string |
-| `ci(` / `ci{` / `ci[` | Cambiar dentro de paréntesis/llaves/brackets |
-| `cit` | Cambiar dentro de tag HTML/XML |
-| `dap` | Borrar párrafo completo |
-| `yis` | Copiar oración |
-| `vaf` | Seleccionar función completa |
+> **Trick:** Select 50 lines in visual, then `:norm @a` — runs the macro on each line.
 
 ---
 
-## Registers — Portapapeles múltiple
+## Text Objects — Edit Precise Blocks
 
-| Atajo | Acción |
-|-------|--------|
-| `"ayy` | Copiar línea al registro `a` |
-| `"ap` | Pegar desde registro `a` |
-| `"+y` | Copiar al portapapeles del sistema |
-| `"+p` | Pegar desde portapapeles del sistema |
-| `"0p` | Pegar último yank (ignora deletes) |
-| `:reg` | Ver todos los registros |
+Format: `[operation][i/a][object]` — `i` = inner (no delimiter), `a` = around (with delimiter).
 
-> **Truco clave:** `dd` sobreescribe el registro default. Usa `"0p` para pegar lo que copiaste antes de borrar algo.
-
----
-
-## Marks — Saltar entre puntos del código
-
-| Atajo | Acción |
-|-------|--------|
-| `ma` | Crear mark `a` en línea actual |
-| `` `a `` | Saltar al mark `a` (línea + columna) |
-| `'a` | Saltar a la línea del mark `a` |
-| `` `. `` | Saltar al último lugar editado |
-| `` `[ `` / `` `] `` | Inicio / fin del último yank o cambio |
-| `` `< `` / `` `> `` | Inicio / fin de última selección visual |
-| `:marks` | Ver todos los marks |
+| Shortcut | Action |
+|----------|--------|
+| `ciw` | Change word |
+| `ci"` / `ci'` / `` ci` `` | Change string content |
+| `ci(` / `ci{` / `ci[` | Change inside parens/braces/brackets |
+| `cit` | Change inside HTML/XML tag |
+| `dap` | Delete entire paragraph |
+| `yis` | Yank sentence |
+| `vaf` | Select entire function |
 
 ---
 
-## Búsqueda y Sustitución Avanzada
+## Registers — Multiple Clipboards
+
+| Shortcut | Action |
+|----------|--------|
+| `"ayy` | Copy line to register `a` |
+| `"ap` | Paste from register `a` |
+| `"+y` | Copy to system clipboard |
+| `"+p` | Paste from system clipboard |
+| `"0p` | Paste last yank (ignores deletes) |
+| `:reg` | View all registers |
+
+> **Key trick:** `dd` overwrites the default register. Use `"0p` to paste what you yanked before deleting something.
+
+---
+
+## Marks — Jump Between Code Points
+
+| Shortcut | Action |
+|----------|--------|
+| `ma` | Create mark `a` at current line |
+| `` `a `` | Jump to mark `a` (line + column) |
+| `'a` | Jump to the line of mark `a` |
+| `` `. `` | Jump to last edited location |
+| `` `[ `` / `` `] `` | Start / end of last yank or change |
+| `` `< `` / `` `> `` | Start / end of last visual selection |
+| `:marks` | View all marks |
+
+---
+
+## Advanced Search and Substitution
 
 ```vim
-" Reemplazar en archivo
-:%s/viejo/nuevo/g
+" Replace in file
+:%s/old/new/g
 
-" Con confirmación
-:%s/viejo/nuevo/gc
+" With confirmation
+:%s/old/new/gc
 
-" Solo en selección visual (presiona : en visual mode)
-:'<,'>s/viejo/nuevo/g
+" Only in visual selection (press : in visual mode)
+:'<,'>s/old/new/g
 
 " Case insensitive
-:%s/viejo/nuevo/gi
+:%s/old/new/gi
 
-" Reemplazar palabra exacta (no substring)
-:%s/\<viejo\>/nuevo/g
+" Replace exact word (no substring)
+:%s/\<old\>/new/g
 
-" Reemplazar en múltiples archivos abiertos
-:bufdo %s/viejo/nuevo/ge | update
+" Replace across all open buffers
+:bufdo %s/old/new/ge | update
 ```
 
-> **Truco:** `cgn` — cambia la siguiente ocurrencia de la búsqueda activa. Luego `.` repite hacia la siguiente. Ultra rápido para refactor.
+> **Trick:** `cgn` — changes the next occurrence of the active search. Then `.` repeats to the next. Ultra fast for refactoring.
 
 ---
 
-## Jump List y Change List
+## Jump List and Change List
 
-| Atajo | Acción |
-|-------|--------|
-| `Ctrl-o` | Saltar atrás (jump list) |
-| `Ctrl-i` | Saltar adelante (jump list) |
-| `g;` | Ir al cambio anterior (change list) |
-| `g,` | Ir al cambio siguiente (change list) |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl-o` | Jump back (jump list) |
+| `Ctrl-i` | Jump forward (jump list) |
+| `g;` | Go to previous change (change list) |
+| `g,` | Go to next change (change list) |
 
-> **Útil:** Vas a una definición con `gd`, exploras, vuelves con `Ctrl-o`.
-
----
-
-## Quickfix — Navegar errores y búsquedas
-
-| Atajo | Acción |
-|-------|--------|
-| `<leader>xq` | Abrir Quickfix list |
-| `<leader>xl` | Abrir Location list |
-| `]q` / `[q` | Siguiente / anterior item en quickfix |
-| `:cdo s/viejo/nuevo/g` | Aplicar sustitución a todos los items del quickfix |
-
-> **Truco pro:** Haz un grep con `<leader>fg`, selecciona resultados, son tu quickfix — edita todos con `:cdo`.
+> **Useful:** Go to a definition with `gd`, explore, come back with `Ctrl-o`.
 
 ---
 
-## Indentación y Formateo
+## Quickfix — Navigate Errors and Searches
 
-| Atajo | Acción |
-|-------|--------|
-| `>>` / `<<` | Indentar / des-indentar línea |
-| `>` / `<` (visual) | Indentar / des-indentar selección |
-| `=` (visual) | Auto-indentar selección |
-| `gg=G` | Auto-indentar archivo completo |
-| `<leader>cf` | Formatear con LSP/Prettier/etc |
+| Shortcut | Action |
+|----------|--------|
+| `<leader>xq` | Open Quickfix list |
+| `<leader>xl` | Open Location list |
+| `]q` / `[q` | Next / Previous quickfix item |
+| `:cdo s/old/new/g` | Apply substitution to all quickfix items |
 
----
-
-## Números y Incremento
-
-| Atajo | Acción |
-|-------|--------|
-| `Ctrl-a` | Incrementar número bajo cursor |
-| `Ctrl-x` | Decrementar número bajo cursor |
-| `10Ctrl-a` | Incrementar en 10 |
-| `g Ctrl-a` | (visual) Incremento secuencial: 1, 2, 3... |
-
-> **Truco:** Selecciona visualmente varias líneas con el mismo número, `g Ctrl-a` las enumera en secuencia.
+> **Pro trick:** Grep with `<leader>fg`, select results — they become your quickfix. Edit all with `:cdo`.
 
 ---
 
-## Splits y Layout eficiente
+## Indentation and Formatting
 
-| Atajo | Acción |
-|-------|--------|
-| `<C-w>=` | Igualar tamaño de todos los splits |
-| `<C-w>_` | Maximizar split horizontalmente |
-| `<C-w>\|` | Maximizar split verticalmente |
-| `<C-w>r` | Rotar ventanas |
-| `<C-w>T` | Mover split a nuevo tab |
-| `<C-w>x` | Intercambiar con ventana adyacente |
-
----
-
-## Folding (plegar código)
-
-| Atajo | Acción |
-|-------|--------|
-| `za` | Toggle fold bajo cursor |
-| `zc` / `zo` | Cerrar / abrir fold |
-| `zM` | Cerrar todos los folds |
-| `zR` | Abrir todos los folds |
-| `zj` / `zk` | Siguiente / anterior fold |
+| Shortcut | Action |
+|----------|--------|
+| `>>` / `<<` | Indent / Dedent line |
+| `>` / `<` (visual) | Indent / Dedent selection |
+| `=` (visual) | Auto-indent selection |
+| `gg=G` | Auto-indent entire file |
+| `<leader>cf` | Format with LSP/Prettier/etc |
 
 ---
 
-## Comandos de Línea Útiles
+## Numbers and Increment
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl-a` | Increment number under cursor |
+| `Ctrl-x` | Decrement number under cursor |
+| `10Ctrl-a` | Increment by 10 |
+| `g Ctrl-a` | (visual) Sequential increment: 1, 2, 3... |
+
+> **Trick:** Select multiple lines with the same number in visual, `g Ctrl-a` enumerates them in sequence.
+
+---
+
+## Splits and Efficient Layout
+
+| Shortcut | Action |
+|----------|--------|
+| `<C-w>=` | Equalize all split sizes |
+| `<C-w>_` | Maximize split horizontally |
+| `<C-w>\|` | Maximize split vertically |
+| `<C-w>r` | Rotate windows |
+| `<C-w>T` | Move split to new tab |
+| `<C-w>x` | Swap with adjacent window |
+
+---
+
+## Folding
+
+| Shortcut | Action |
+|----------|--------|
+| `za` | Toggle fold under cursor |
+| `zc` / `zo` | Close / Open fold |
+| `zM` | Close all folds |
+| `zR` | Open all folds |
+| `zj` / `zk` | Next / Previous fold |
+
+---
+
+## Useful Command-Line Commands
 
 ```vim
-" Ordenar líneas seleccionadas
+" Sort selected lines
 :'<,'>sort
 
-" Borrar líneas duplicadas
+" Delete duplicate lines
 :sort u
 
-" Borrar líneas en blanco
+" Delete blank lines
 :g/^$/d
 
-" Borrar líneas que contienen patrón
+" Delete lines matching pattern
 :g/console.log/d
 
-" Ejecutar comando de shell e insertar output
+" Run shell command and insert output
 :r !date
 
-" Ver diferencia con versión guardada en disco
+" Diff against saved version on disk
 :w !diff % -
 ```
 
 ---
 
-## Navegación en Código (LSP)
+## Code Navigation (LSP)
 
-| Atajo | Acción |
-|-------|--------|
-| `gd` → `Ctrl-o` | Ir a definición y volver |
-| `<leader>ss` | Buscar símbolo en archivo |
-| `<leader>sS` | Buscar símbolo en workspace |
-| `<leader>xd` | Todos los diagnósticos del proyecto |
-| `<leader>xe` | Solo errores |
-
----
-
-## Snacks — Features Ocultos
-
-| Atajo | Acción |
-|-------|--------|
-| `<leader>n` | Notificaciones recientes |
-| `<leader>bd` | Borrar buffer sin cerrar split |
-| `<leader>bo` | Cerrar todos los buffers menos el actual |
-| `z.` | Scroll suave al cursor (mini-animate) |
+| Shortcut | Action |
+|----------|--------|
+| `gd` → `Ctrl-o` | Go to definition and return |
+| `<leader>ss` | Search symbol in file |
+| `<leader>sS` | Search symbol in workspace |
+| `<leader>xd` | All project diagnostics |
+| `<leader>xe` | Errors only |
 
 ---
 
-## Trucos de Selección Visual
+## Snacks — Hidden Features
+
+| Shortcut | Action |
+|----------|--------|
+| `<leader>n` | Recent notifications |
+| `<leader>bd` | Delete buffer without closing split |
+| `<leader>bo` | Close all buffers except current |
+| `z.` | Smooth scroll to cursor (mini-animate) |
+
+---
+
+## Visual Selection Tricks
 
 ```
-# Seleccionar hasta fin de línea (sin newline)
+# Select to end of line (no newline)
 v$h
 
-# Seleccionar bloque de función completa
-vaf   (requiere treesitter)
+# Select entire function block
+vaf   (requires treesitter)
 
-# Expandir selección con treesitter
-<leader> mientras estás en visual mode
+# Expand selection with treesitter
+<leader> while in visual mode
 ```
 
-| Atajo | Acción |
-|-------|--------|
-| `gv` | Reseleccionar última selección visual |
-| `o` (en visual) | Mover cursor al otro extremo de la selección |
+| Shortcut | Action |
+|----------|--------|
+| `gv` | Reselect last visual selection |
+| `o` (in visual) | Move cursor to other end of selection |
 
 ---
 
-## TypeScript / PHP — Específicos
+## TypeScript / PHP — Specific
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader>co` | Organizar imports (TS) |
+| Shortcut | Action |
+|----------|--------|
+| `<leader>co` | Organize imports (TS) |
 | `<leader>cR` | Restart LSP |
-| `<leader>ci` | Info del LSP activo |
-| `]e` / `[e` | Navegar errores de tipo |
+| `<leader>ci` | Active LSP info |
+| `]e` / `[e` | Navigate type errors |
 
-> **Truco:** `:LspInfo` para ver qué servidores están activos en el archivo actual.
+> **Trick:** `:LspInfo` to see which servers are active in the current file.
 
 ---
 
-## Clipboard — Sistema
+## Clipboard — System
 
-Agregar en config si aún no funciona `"+y`:
+Add to config if `"+y` doesn't work:
 
 ```lua
-vim.opt.clipboard = "unnamedplus"  -- Sincroniza con portapapeles del sistema
+vim.opt.clipboard = "unnamedplus"  -- Sync with system clipboard
 ```
 
-Con esto `y` y `p` usan el clipboard del sistema directamente.
+With this, `y` and `p` use the system clipboard directly.
 
 ---
 
-## Miscelánea Productividad
+## Productivity Misc
 
-| Atajo / Comando | Acción |
-|-----------------|--------|
-| `J` | Unir línea siguiente a la actual |
-| `gJ` | Unir sin agregar espacio |
-| `xp` | Intercambiar char con el siguiente |
-| `ddp` | Mover línea una posición abajo |
-| `ddkP` | Mover línea una posición arriba |
-| `:earlier 5m` | Deshacer al estado de hace 5 minutos |
-| `:later 30s` | Rehacer al estado de hace 30 segundos |
-| `q:` | Historial de comandos |
-| `q/` | Historial de búsquedas |
+| Shortcut / Command | Action |
+|--------------------|--------|
+| `J` | Join next line to current |
+| `gJ` | Join without adding space |
+| `xp` | Swap char with next |
+| `ddp` | Move line one position down |
+| `ddkP` | Move line one position up |
+| `:earlier 5m` | Undo to state 5 minutes ago |
+| `:later 30s` | Redo to state 30 seconds ago |
+| `q:` | Command history |
+| `q/` | Search history |

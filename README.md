@@ -2,6 +2,10 @@
 
 Personal development environment configuration for Arch Linux.
 
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./README.es.md)
+
 ![Qtile](.screenshots/qtile-view.png)
 
 ![Qtile Fastfetch](.screenshots/qtile-fastfetch.png)

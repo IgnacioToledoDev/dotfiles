@@ -1,54 +1,58 @@
-# Plugins de TMUX
+# TMUX Plugins
 
-Gestor: **TPM** (Tmux Plugin Manager) — instalado en `tmux/plugins/tpm`.
+Manager: **TPM** (Tmux Plugin Manager) — installed at `tmux/plugins/tpm`.
 
-## Plugins incluidos
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./PLUGINS.es.md)
 
-| Plugin | Repo | Descripción |
+## Included Plugins
+
+| Plugin | Repo | Description |
 |--------|------|-------------|
-| tmux-kanagawa | [Nybkox/tmux-kanagawa](https://github.com/Nybkox/tmux-kanagawa) | Tema visual + barra de estado |
+| tmux-kanagawa | [Nybkox/tmux-kanagawa](https://github.com/Nybkox/tmux-kanagawa) | Visual theme + status bar |
 
-### Widgets activos (tmux-kanagawa)
+### Active Widgets (tmux-kanagawa)
 
-| Widget | Muestra |
-|--------|---------|
-| `git` | Rama actual del directorio |
-| `cpu-usage` | % uso de CPU |
-| `ram-usage` | % uso de RAM |
+| Widget | Shows |
+|--------|-------|
+| `git` | Current branch of the directory |
+| `cpu-usage` | CPU usage % |
+| `ram-usage` | RAM usage % |
 
-Tema: `dragon`.
+Theme: `dragon`.
 
 ---
 
-## Instalación desde cero
+## Fresh Install
 
-### 1. Instalar TPM
+### 1. Install TPM
 
-TPM viene como submodule. Inicializarlo:
+TPM ships as a submodule. Initialize it:
 
 ```bash
 git submodule update --init --recursive
 ```
 
-O clonarlo manualmente a donde tmux lo espera:
+Or clone it manually to where tmux expects it:
 
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-### 2. Instalar plugins
+### 2. Install plugins
 
-Los plugins **no están en el repo** — TPM los descarga desde GitHub al instalarlos.
+Plugins are **not in the repo** — TPM downloads them from GitHub on install.
 
-Abrir tmux y ejecutar:
+Open tmux and run:
 
 ```
 prefix + I
 ```
 
-> `prefix` = `Ctrl+a`. TPM clona e instala todos los plugins definidos en `.tmux.conf`, incluyendo `tmux-kanagawa`.
+> `prefix` = `Ctrl+a`. TPM clones and installs all plugins defined in `.tmux.conf`, including `tmux-kanagawa`.
 
-### 3. Recargar config (si es necesario)
+### 3. Reload config (if needed)
 
 ```bash
 tmux source ~/.tmux.conf
@@ -56,23 +60,23 @@ tmux source ~/.tmux.conf
 
 ---
 
-## Agregar nuevos plugins
+## Add a New Plugin
 
-1. Agregar en `.tmux.conf`:
+1. Add in `.tmux.conf`:
 
 ```bash
-set -g @plugin 'usuario/nombre-plugin'
+set -g @plugin 'user/plugin-name'
 ```
 
-2. Instalar con `prefix + I`.
+2. Install with `prefix + I`.
 
-## Actualizar plugins
+## Update Plugins
 
 ```
 prefix + U
 ```
 
-## Desinstalar plugin
+## Remove a Plugin
 
-1. Eliminar la línea `set -g @plugin` en `.tmux.conf`.
-2. Ejecutar `prefix + alt + u`.
+1. Delete the `set -g @plugin` line in `.tmux.conf`.
+2. Run `prefix + alt + u`.

@@ -1,227 +1,231 @@
-# TMUX - Configuración Custom
+# TMUX — Custom Configuration
 
-> Repo: [IgnacioToledoDev/dotfiles](https://github.com/IgnacioToledoDev/dotfiles) — config en `tmux/.tmux.conf`
+> Repo: [IgnacioToledoDev/dotfiles](https://github.com/IgnacioToledoDev/dotfiles) — config at `tmux/.tmux.conf`
 
-> Prefijo por defecto de tmux (`Ctrl+b`) reemplazado por **`Ctrl+a`**.
-> En esta guía, `prefix` = `Ctrl+a`.
+> Default tmux prefix (`Ctrl+b`) replaced by **`Ctrl+a`**.
+> In this guide, `prefix` = `Ctrl+a`.
 
----
-
-## Prefijo
-
-| Atajo | Acción |
-|-------|--------|
-| `Ctrl+a` | Activar prefijo (reemplaza `Ctrl+b`) |
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./TMUX.es.md)
 
 ---
 
-## Windows (Ventanas)
+## Prefix
 
-> Numeración empieza en **1** (`base-index 1`). Al cerrar una ventana, se renumeran automáticamente (`renumber-windows on`).
-
-### Gestión
-
-| Atajo | Acción |
-|-------|--------|
-| `prefix` + `c` | Crear ventana nueva |
-| `prefix` + `,` | Renombrar ventana actual |
-| `prefix` + `&` | Cerrar ventana actual (pide confirmación) |
-
-### Navegar entre ventanas
-
-| Atajo | Acción |
-|-------|--------|
-| `prefix` + `n` | Ventana **siguiente** |
-| `prefix` + `p` | Ventana **anterior** |
-| `prefix` + `[1-9]` | Ir a ventana por número |
-| `prefix` + `w` | Lista interactiva de ventanas |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+a` | Activate prefix (replaces `Ctrl+b`) |
 
 ---
 
-## Sesiones
+## Windows
 
-### Gestión desde terminal
+> Numbering starts at **1** (`base-index 1`). When a window is closed, they renumber automatically (`renumber-windows on`).
+
+### Management
+
+| Shortcut | Action |
+|----------|--------|
+| `prefix` + `c` | Create new window |
+| `prefix` + `,` | Rename current window |
+| `prefix` + `&` | Close current window (asks for confirmation) |
+
+### Navigate Between Windows
+
+| Shortcut | Action |
+|----------|--------|
+| `prefix` + `n` | **Next** window |
+| `prefix` + `p` | **Previous** window |
+| `prefix` + `[1-9]` | Go to window by number |
+| `prefix` + `w` | Interactive window list |
+
+---
+
+## Sessions
+
+### Manage From Terminal
 
 ```bash
-tmux new -s <nombre>       # nueva sesión con nombre
-tmux ls                    # listar sesiones activas
-tmux attach -t <nombre>    # reconectar a sesión existente
-tmux kill-session -t <nombre>  # eliminar sesión
+tmux new -s <name>           # new named session
+tmux ls                      # list active sessions
+tmux attach -t <name>        # reconnect to existing session
+tmux kill-session -t <name>  # destroy session
 ```
 
-### Recuperar sesión desde dentro de tmux
+### Recover Session From Inside Tmux
 
-| Atajo | Acción |
-|-------|--------|
-| `prefix` + `d` | Desconectarse (detach) — sesión sigue corriendo |
-| `prefix` + `s` | Lista interactiva de sesiones (cambiar o reconectar) |
-| `prefix` + `$` | Renombrar sesión actual |
+| Shortcut | Action |
+|----------|--------|
+| `prefix` + `d` | Detach — session keeps running |
+| `prefix` + `s` | Interactive session list (switch or reconnect) |
+| `prefix` + `$` | Rename current session |
 
-> Las sesiones persisten mientras el proceso tmux esté vivo. Al reconectar: `tmux attach` (última sesión) o `tmux attach -t <nombre>`.
+> Sessions persist as long as the tmux process is alive. To reconnect: `tmux attach` (last session) or `tmux attach -t <name>`.
 
 ---
 
-## Paneles
+## Panes
 
-> Numeración empieza en **1** (`pane-base-index 1`).
+> Numbering starts at **1** (`pane-base-index 1`).
 
-### Dividir pantalla
+### Split Screen
 
-| Atajo | Acción |
-|-------|--------|
-| `prefix` + `v` | Dividir panel **horizontal** (izquierda / derecha) — hereda directorio actual |
-| `prefix` + `d` | Dividir panel **vertical** (arriba / abajo) — hereda directorio actual |
+| Shortcut | Action |
+|----------|--------|
+| `prefix` + `v` | Split **horizontally** (left / right) — inherits current directory |
+| `prefix` + `d` | Split **vertically** (top / bottom) — inherits current directory |
 
-### Navegar entre paneles
+### Navigate Between Panes
 
-Estilo Vim — sin flechas.
+Vim-style — no arrow keys.
 
-| Atajo | Dirección |
-|-------|-----------|
-| `prefix` + `h` | Panel de la **izquierda** |
-| `prefix` + `j` | Panel de **abajo** |
-| `prefix` + `k` | Panel de **arriba** |
-| `prefix` + `l` | Panel de la **derecha** |
+| Shortcut | Direction |
+|----------|-----------|
+| `prefix` + `h` | **Left** pane |
+| `prefix` + `j` | **Down** pane |
+| `prefix` + `k` | **Up** pane |
+| `prefix` + `l` | **Right** pane |
 
-### Redimensionar paneles
+### Resize Panes
 
-Mantenible (repetible sin soltar el prefijo gracias a `-r`).
+Repeatable (without releasing prefix, thanks to `-r`).
 
-| Atajo | Acción |
-|-------|--------|
-| `prefix` + `H` | Expandir hacia la **izquierda** |
-| `prefix` + `J` | Expandir hacia **abajo** |
-| `prefix` + `K` | Expandir hacia **arriba** |
-| `prefix` + `L` | Expandir hacia la **derecha** |
+| Shortcut | Action |
+|----------|--------|
+| `prefix` + `H` | Expand **left** |
+| `prefix` + `J` | Expand **down** |
+| `prefix` + `K` | Expand **up** |
+| `prefix` + `L` | Expand **right** |
 
-### Maximizar panel
+### Maximize Pane
 
-| Atajo | Acción |
-|-------|--------|
-| `prefix` + `m` | **Zoom** al panel actual (toggle — vuelve a pulsar para restaurar) |
+| Shortcut | Action |
+|----------|--------|
+| `prefix` + `m` | **Zoom** current pane (toggle — press again to restore) |
 
 ---
 
 ## Mouse
 
-Mouse habilitado. Puedes:
-- Hacer clic en un panel para seleccionarlo
-- Arrastrar bordes de paneles para redimensionar
-- Hacer scroll con la rueda para ver historial
+Mouse enabled. You can:
+- Click a pane to select it
+- Drag pane borders to resize
+- Scroll with the wheel to browse history
 
 ---
 
-## Modo copia (scroll / historial)
+## Copy Mode (scroll / history)
 
-Navegación estilo Vim activada en modo copia.
+Vim-style navigation enabled in copy mode.
 
-| Paso | Atajo |
-|------|-------|
-| Entrar a modo copia | `prefix` + `[` |
-| Moverse | `h j k l` / flechas |
-| Iniciar selección | `v` |
-| Copiar selección | `y` (copia al portapapeles y sale del modo) |
-| Salir sin copiar | `q` |
+| Step | Shortcut |
+|------|----------|
+| Enter copy mode | `prefix` + `[` |
+| Move | `h j k l` / arrows |
+| Start selection | `v` |
+| Copy selection | `y` (copies to clipboard and exits mode) |
+| Exit without copying | `q` |
 
 ---
 
-## Barra de estado
+## Status Bar
 
-| Zona | Contenido |
-|------|-----------|
-| Izquierda | `[nombre-sesión]` en verde |
-| Derecha | Hora (`HH:MM`) en amarillo + fecha (`DD-Mes-AA`) en blanco |
+| Zone | Content |
+|------|---------|
+| Left | `[session-name]` in green |
+| Right | Time (`HH:MM`) in yellow + date (`DD-Mon-YY`) in white |
 
 ---
 
 ## Plugins
 
-Gestor: **TPM** (Tmux Plugin Manager).
+Manager: **TPM** (Tmux Plugin Manager).
 
-| Plugin | Descripción |
+| Plugin | Description |
 |--------|-------------|
-| [tmux-kanagawa](https://github.com/Nybkox/tmux-kanagawa) | Tema visual + barra de estado con widgets |
+| [tmux-kanagawa](https://github.com/Nybkox/tmux-kanagawa) | Visual theme + status bar with widgets |
 
-### Widgets activos en la barra (kanagawa)
+### Active Bar Widgets (kanagawa)
 
-| Widget | Muestra |
-|--------|---------|
-| `git` | Rama actual del directorio |
-| `cpu-usage` | % uso de CPU |
-| `ram-usage` | % uso de RAM |
+| Widget | Shows |
+|--------|-------|
+| `git` | Current branch of directory |
+| `cpu-usage` | CPU usage % |
+| `ram-usage` | RAM usage % |
 
-Tema configurado: `dragon`.
+Theme configured: `dragon`.
 
 ---
 
-## Instalación tras clonar el repo
+## Installation After Cloning
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/IgnacioToledoDev/dotfiles ~/.dotfiles
 ```
 
-### 2. Enlazar la config
+### 2. Link the config
 
 ```bash
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 ```
 
-### 3. Instalar TPM
+### 3. Install TPM
 
-TPM está incluido como submodule en `tmux/plugins/tpm`. Si el directorio está vacío al clonar:
+TPM is included as a submodule at `tmux/plugins/tpm`. If the directory is empty after cloning:
 
 ```bash
 git -C ~/.dotfiles submodule update --init --recursive
 ```
 
-O instalar TPM manualmente:
+Or install TPM manually:
 
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-### 4. Instalar plugins
+### 4. Install plugins
 
-Abrir tmux y ejecutar:
+Open tmux and run:
 
 ```
 prefix + I
 ```
 
-> `prefix` = `Ctrl+a`. TPM descarga e instala todos los plugins definidos en `.tmux.conf`.
+> `prefix` = `Ctrl+a`. TPM downloads and installs all plugins defined in `.tmux.conf`.
 
 ---
 
-## Referencia rápida
+## Quick Reference
 
 ```
-Ctrl+a  →  prefijo
+Ctrl+a  →  prefix
 
-Sesiones:
-  tmux new -s <nombre>      nueva sesión
-  tmux attach -t <nombre>   reconectar
-  tmux ls                   listar
-  prefix+d   detach (sesión sigue viva)
-  prefix+s   lista interactiva de sesiones
-  prefix+$   renombrar sesión
+Sessions:
+  tmux new -s <name>      new session
+  tmux attach -t <name>   reconnect
+  tmux ls                 list
+  prefix+d   detach (session stays alive)
+  prefix+s   interactive session list
+  prefix+$   rename session
 
-Ventanas  (inician en 1, se renumeran al cerrar):
-  c   nueva ventana
-  ,   renombrar
-  n/p navegar siguiente/anterior
-  1-9 ir a número
+Windows  (start at 1, renumber on close):
+  c   new window
+  ,   rename
+  n/p navigate next/previous
+  1-9 go to number
 
-Paneles  (inician en 1):
-  v   dividir horizontal (hereda path)
-  d   dividir vertical (hereda path)
-  h/j/k/l   navegar (vim)
-  H/J/K/L   redimensionar
+Panes  (start at 1):
+  v   split horizontal (inherits path)
+  d   split vertical (inherits path)
+  h/j/k/l   navigate (vim)
+  H/J/K/L   resize
   m   zoom toggle
 
-Copia:
-  prefix+[  entrar modo copia
-  v   seleccionar
-  y   copiar
+Copy:
+  prefix+[  enter copy mode
+  v   select
+  y   copy
 ```

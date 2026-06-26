@@ -1,165 +1,169 @@
 # Neovim Shortcuts — LazyVim
 
-> `<leader>` = **Espacio**. `C` = Ctrl, `S` = Shift.
+> `<leader>` = **Space**. `C` = Ctrl, `S` = Shift.
+
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./Shortcuts.es.md)
 
 ---
 
-## Movimiento Básico
+## Basic Movement
 
-| Atajo | Acción |
-|-------|--------|
-| `h j k l` | Izquierda / Abajo / Arriba / Derecha |
-| `w` / `b` | Siguiente / Anterior palabra |
-| `e` | Final de palabra |
-| `0` / `^` / `$` | Inicio línea / Primer char / Fin línea |
-| `gg` / `G` | Inicio / Fin del archivo |
-| `{` / `}` | Bloque anterior / siguiente |
-| `%` | Saltar al par de `() [] {}` |
-| `Ctrl-d` / `Ctrl-u` | Media página abajo / arriba |
-| `zz` | Centrar cursor en pantalla |
-
----
-
-## Edición
-
-| Atajo | Acción |
-|-------|--------|
-| `i` / `a` | Insert antes / después del cursor |
-| `I` / `A` | Insert inicio / fin de línea |
-| `o` / `O` | Nueva línea abajo / arriba |
-| `ciw` | Cambiar palabra entera |
-| `ci"` | Cambiar contenido entre comillas |
-| `di(` | Borrar contenido entre paréntesis |
-| `yiw` | Copiar palabra |
-| `dd` / `yy` | Borrar / Copiar línea |
-| `p` / `P` | Pegar después / antes |
-| `u` / `Ctrl-r` | Deshacer / Rehacer |
-| `.` | Repetir última acción |
-| `~` | Cambiar mayús/minús del char |
-| `gc` + movimiento | Comentar (visual: `gc`) |
+| Shortcut | Action |
+|----------|--------|
+| `h j k l` | Left / Down / Up / Right |
+| `w` / `b` | Next / Previous word |
+| `e` | End of word |
+| `0` / `^` / `$` | Line start / First char / Line end |
+| `gg` / `G` | File start / File end |
+| `{` / `}` | Previous / Next block |
+| `%` | Jump to matching `() [] {}` |
+| `Ctrl-d` / `Ctrl-u` | Half page down / up |
+| `zz` | Center cursor on screen |
 
 ---
 
-## Selección Visual
+## Editing
 
-| Atajo | Acción |
-|-------|--------|
-| `v` | Visual por char |
-| `V` | Visual por línea |
-| `Ctrl-v` | Visual en bloque |
-| `viw` / `vip` | Seleccionar palabra / párrafo |
-| `va"` | Seleccionar incluyendo comillas |
-
----
-
-## Búsqueda
-
-| Atajo | Acción |
-|-------|--------|
-| `/texto` | Buscar hacia adelante |
-| `?texto` | Buscar hacia atrás |
-| `n` / `N` | Siguiente / anterior resultado |
-| `*` / `#` | Buscar palabra bajo cursor (adelante/atrás) |
-| `<leader>sr` | Buscar y reemplazar (Spectre) |
+| Shortcut | Action |
+|----------|--------|
+| `i` / `a` | Insert before / after cursor |
+| `I` / `A` | Insert at line start / end |
+| `o` / `O` | New line below / above |
+| `ciw` | Change entire word |
+| `ci"` | Change content inside quotes |
+| `di(` | Delete content inside parentheses |
+| `yiw` | Yank word |
+| `dd` / `yy` | Delete / Yank line |
+| `p` / `P` | Paste after / before |
+| `u` / `Ctrl-r` | Undo / Redo |
+| `.` | Repeat last action |
+| `~` | Toggle case of char |
+| `gc` + motion | Comment (visual: `gc`) |
 
 ---
 
-## Archivos y Fuzzy Finder (Snacks/Telescope)
+## Visual Selection
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader><space>` | Buscar archivos del proyecto |
-| `<leader>ff` | Buscar archivos |
-| `<leader>fr` | Archivos recientes |
-| `<leader>fb` | Buffers abiertos |
-| `<leader>fg` | Live grep (buscar texto en proyecto) |
-| `<leader>/` | Grep en buffer actual |
-| `<leader>e` | Explorador de archivos (Neo-tree) |
-| `<leader>E` | Neo-tree raíz del proyecto |
+| Shortcut | Action |
+|----------|--------|
+| `v` | Char-wise visual |
+| `V` | Line-wise visual |
+| `Ctrl-v` | Block visual |
+| `viw` / `vip` | Select word / paragraph |
+| `va"` | Select including quotes |
 
 ---
 
-## Buffers y Ventanas
+## Search
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader>bd` | Cerrar buffer actual |
-| `<leader>bo` | Cerrar otros buffers |
-| `[b` / `]b` | Buffer anterior / siguiente |
-| `<leader>bb` | Último buffer |
-| `<C-h/j/k/l>` | Navegar entre ventanas |
-| `<leader>w\|` | Split vertical |
-| `<leader>w-` | Split horizontal |
-| `<leader>wd` | Cerrar ventana |
-| `<leader>wm` | Maximizar ventana (toggle) |
+| Shortcut | Action |
+|----------|--------|
+| `/text` | Search forward |
+| `?text` | Search backward |
+| `n` / `N` | Next / Previous result |
+| `*` / `#` | Search word under cursor (forward/back) |
+| `<leader>sr` | Search and replace (Spectre) |
 
 ---
 
-## LSP (Código)
+## Files and Fuzzy Finder (Snacks/Telescope)
 
-| Atajo | Acción |
-|-------|--------|
-| `gd` | Ir a definición |
-| `gD` | Ir a declaración |
-| `gr` | Ver referencias |
-| `gI` | Ir a implementación |
-| `gy` | Ir a definición de tipo |
-| `K` | Hover — documentación |
+| Shortcut | Action |
+|----------|--------|
+| `<leader><space>` | Find project files |
+| `<leader>ff` | Find files |
+| `<leader>fr` | Recent files |
+| `<leader>fb` | Open buffers |
+| `<leader>fg` | Live grep (search text in project) |
+| `<leader>/` | Grep in current buffer |
+| `<leader>e` | File explorer (Neo-tree) |
+| `<leader>E` | Neo-tree at project root |
+
+---
+
+## Buffers and Windows
+
+| Shortcut | Action |
+|----------|--------|
+| `<leader>bd` | Close current buffer |
+| `<leader>bo` | Close other buffers |
+| `[b` / `]b` | Previous / Next buffer |
+| `<leader>bb` | Last buffer |
+| `<C-h/j/k/l>` | Navigate between windows |
+| `<leader>w\|` | Vertical split |
+| `<leader>w-` | Horizontal split |
+| `<leader>wd` | Close window |
+| `<leader>wm` | Maximize window (toggle) |
+
+---
+
+## LSP (Code)
+
+| Shortcut | Action |
+|----------|--------|
+| `gd` | Go to definition |
+| `gD` | Go to declaration |
+| `gr` | View references |
+| `gI` | Go to implementation |
+| `gy` | Go to type definition |
+| `K` | Hover — documentation |
 | `<leader>ca` | Code actions |
-| `<leader>cr` | Renombrar símbolo |
-| `<leader>cf` | Formatear archivo |
-| `<leader>cd` | Diagnóstico de la línea |
-| `]d` / `[d` | Siguiente / anterior diagnóstico |
-| `]e` / `[e` | Siguiente / anterior error |
-| `]w` / `[w` | Siguiente / anterior warning |
+| `<leader>cr` | Rename symbol |
+| `<leader>cf` | Format file |
+| `<leader>cd` | Line diagnostic |
+| `]d` / `[d` | Next / Previous diagnostic |
+| `]e` / `[e` | Next / Previous error |
+| `]w` / `[w` | Next / Previous warning |
 
 ---
 
 ## Git (LazyGit + Gitsigns)
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader>gg` | Abrir LazyGit |
-| `<leader>gd` | Diff del archivo actual |
-| `<leader>gb` | Blame de la línea |
-| `<leader>gs` | Staging de hunks (Gitsigns) |
-| `<leader>gS` | Stage buffer completo |
+| Shortcut | Action |
+|----------|--------|
+| `<leader>gg` | Open LazyGit |
+| `<leader>gd` | Diff current file |
+| `<leader>gb` | Blame line |
+| `<leader>gs` | Stage hunk (Gitsigns) |
+| `<leader>gS` | Stage entire buffer |
 | `<leader>gr` | Reset hunk |
-| `]h` / `[h` | Siguiente / anterior hunk |
-| `<leader>gl` | Log de commits |
+| `]h` / `[h` | Next / Previous hunk |
+| `<leader>gl` | Commit log |
 
 ---
 
 ## Terminal
 
-| Atajo | Acción |
-|-------|--------|
-| `Ctrl-\` | Abrir/cerrar terminal flotante (ToggleTerm) |
-| `<leader>fv` | Terminal en split vertical derecha |
-| `<Esc>` (en terminal) | Salir del modo terminal |
-| `<C-h/j/k/l>` (en terminal) | Navegar a ventana adyacente |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl-\` | Open/close floating terminal (ToggleTerm) |
+| `<leader>fv` | Terminal in right vertical split |
+| `<Esc>` (in terminal) | Exit terminal mode |
+| `<C-h/j/k/l>` (in terminal) | Navigate to adjacent window |
 
 ---
 
-## DBee (Base de Datos)
+## DBee (Database)
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader>db` | Abrir/cerrar DBee |
+| Shortcut | Action |
+|----------|--------|
+| `<leader>db` | Open/close DBee |
 
-> Dentro de DBee: usa `?` para ver los atajos internos.
+> Inside DBee: press `?` to see internal shortcuts.
 
 ---
 
-## Utilidades LazyVim
+## LazyVim Utilities
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader>l` | Abrir Lazy (gestor de plugins) |
-| `<leader>cm` | Mason (gestor de LSP/tools) |
-| `<leader>qq` | Salir de Neovim |
-| `<leader>un` | Descartar notificaciones |
-| `<leader>uC` | Cambiar colorschema |
+| Shortcut | Action |
+|----------|--------|
+| `<leader>l` | Open Lazy (plugin manager) |
+| `<leader>cm` | Mason (LSP/tools manager) |
+| `<leader>qq` | Quit Neovim |
+| `<leader>un` | Dismiss notifications |
+| `<leader>uC` | Change colorscheme |
 | `<leader>ul` | Toggle line numbers |
 | `<leader>uw` | Toggle word wrap |
 | `<leader>ui` | Inspect pos (highlight groups) |
@@ -168,10 +172,10 @@
 
 ## Tabs
 
-| Atajo | Acción |
-|-------|--------|
-| `<leader><tab>l` | Último tab |
-| `<leader><tab>f` | Primer tab |
-| `<leader><tab><tab>` | Nuevo tab |
-| `<leader><tab>d` | Cerrar tab |
-| `]<tab>` / `[<tab>` | Siguiente / anterior tab |
+| Shortcut | Action |
+|----------|--------|
+| `<leader><tab>l` | Last tab |
+| `<leader><tab>f` | First tab |
+| `<leader><tab><tab>` | New tab |
+| `<leader><tab>d` | Close tab |
+| `]<tab>` / `[<tab>` | Next / Previous tab |

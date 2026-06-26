@@ -1,72 +1,76 @@
 # Neovim Config — LazyVim
 
-Config personal basada en [LazyVim](https://lazyvim.github.io).
+Personal config based on [LazyVim](https://lazyvim.github.io).
 
-## Documentación
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./README.es.md)
 
-| Archivo | Contenido |
-|---------|-----------|
-| [`SHORTCUTS.md`](./SHORTCUTS.md) | Atajos esenciales de Neovim y plugins |
-| [`DEV_TRICKS.md`](./DEV_TRICKS.md) | Trucos avanzados para desarrollo |
+## Documentation
+
+| File | Content |
+|------|---------|
+| [`Shortcuts.md`](./Shortcuts.md) | Essential Neovim and plugin shortcuts |
+| [`DEV_TRICKS.md`](./DEV_TRICKS.md) | Advanced developer tricks |
 
 ---
 
-## Plugins Instalados
+## Installed Plugins
 
 ### Core
-| Plugin | Uso |
-|--------|-----|
-| [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) | Terminal flotante (`Ctrl-\`) |
-| [nvim-dbee](https://github.com/kndndrj/nvim-dbee) | Cliente de base de datos (`<leader>db`) |
+| Plugin | Usage |
+|--------|-------|
+| [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim) | Floating terminal (`Ctrl-\`) |
+| [nvim-dbee](https://github.com/kndndrj/nvim-dbee) | Database client (`<leader>db`) |
 
-### Extras LazyVim activos
-| Extra | Descripción |
+### Active LazyVim Extras
+| Extra | Description |
 |-------|-------------|
-| `lang.typescript` + `vtsls` | TypeScript con vtsls LSP |
+| `lang.typescript` + `vtsls` | TypeScript with vtsls LSP |
 | `lang.php` | PHP + Intelephense |
 | `lang.tailwind` | Tailwind CSS |
-| `lang.twig` | Templates Twig |
+| `lang.twig` | Twig templates |
 | `lang.docker` | Dockerfile support |
-| `lang.json` | JSON con esquemas |
-| `lang.yaml` | YAML con esquemas |
-| `lang.markdown` | Markdown preview y formato |
-| `ui.dashboard-nvim` | Dashboard de inicio |
-| `ui.mini-animate` | Animaciones suaves |
-| `ui.smear-cursor` | Cursor con efecto smear |
-| `util.mini-hipatterns` | Highlight de patrones (colores hex, etc.) |
-| `ai.claudecode` | Integración Claude Code |
+| `lang.json` | JSON with schemas |
+| `lang.yaml` | YAML with schemas |
+| `lang.markdown` | Markdown preview and formatting |
+| `ui.dashboard-nvim` | Startup dashboard |
+| `ui.mini-animate` | Smooth animations |
+| `ui.smear-cursor` | Smear cursor effect |
+| `util.mini-hipatterns` | Pattern highlighting (hex colors, etc.) |
+| `ai.claudecode` | Claude Code integration |
 
 ---
 
-## Atajos Clave (resumen)
+## Key Shortcuts (summary)
 
-| Atajo | Acción |
-|-------|--------|
-| `<Space><Space>` | Buscar archivos |
-| `<Space>fg` | Live grep en el proyecto |
-| `<Space>e` | Explorador de archivos |
+| Shortcut | Action |
+|----------|--------|
+| `<Space><Space>` | Find files |
+| `<Space>fg` | Live grep in project |
+| `<Space>e` | File explorer |
 | `<Space>gg` | LazyGit |
 | `<Space>ca` | Code actions |
-| `gd` | Ir a definición |
-| `K` | Documentación hover |
-| `Ctrl-\` | Terminal flotante |
-| `<Space>fv` | Terminal split vertical |
-| `<Space>db` | Abrir DBee |
+| `gd` | Go to definition |
+| `K` | Hover documentation |
+| `Ctrl-\` | Floating terminal |
+| `<Space>fv` | Vertical split terminal |
+| `<Space>db` | Open DBee |
 
 ---
 
-## Estructura
+## Structure
 
 ```
 ~/.config/nvim/
 ├── lua/
 │   ├── config/
-│   │   └── keymaps.lua     # Atajos personalizados
+│   │   └── keymaps.lua     # Custom keymaps
 │   └── plugins/
-│       ├── toggleterm.lua  # Terminal flotante
-│       ├── dbee.lua        # Cliente DB
+│       ├── toggleterm.lua  # Floating terminal
+│       ├── dbee.lua        # DB client
 │       └── dashboard.lua   # Dashboard
-├── lazyvim.json            # Extras LazyVim habilitados
-├── SHORTCUTS.md            # Referencia de atajos
-└── DEV_TRICKS.md           # Trucos para desarrollo
+├── lazyvim.json            # Enabled LazyVim extras
+├── Shortcuts.md            # Shortcut reference
+└── DEV_TRICKS.md           # Developer tricks
 ```

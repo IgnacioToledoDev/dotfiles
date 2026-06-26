@@ -4,7 +4,7 @@
 
 ***Idioma***
 - 🇪🇸 Español
-- [🇺🇸 English](https://github.com/antoniosarosi/dotfiles/tree/master/.config/qtile)
+- [🇺🇸 English](./README.md)
 
 ## Instalación (Arch)
 

@@ -1,36 +1,40 @@
 # fastfetch
 
-Configuración de fastfetch con ASCII art personalizado y colores Catppuccin Mocha.
+fastfetch configuration with custom ASCII art and Catppuccin Mocha colors.
 
-## Instalación manual
+***Language***
+- 🇺🇸 English
+- [🇪🇸 Español](./README.es.md)
 
-**Dependencias (Arch):**
+## Manual Installation
+
+**Dependencies (Arch):**
 
 ```bash
 sudo pacman -S fastfetch
 ```
 
-**Copiar la carpeta:**
+**Copy the folder:**
 
 ```bash
 cp -r ~/dotfiles/fastfetch ~/.config/fastfetch
 ```
 
-## Estructura
+## Structure
 
 ```
 fastfetch/
-├── config.jsonc   # Config principal: módulos, colores, logo
-└── ascii.txt      # Arte ASCII del logo
+├── config.jsonc   # Main config: modules, colors, logo
+└── ascii.txt      # Logo ASCII art
 ```
 
-## Módulos activos
+## Active Modules
 
-| Módulo   | Icono | Color        |
-|----------|-------|--------------|
-| OS       |      | Sapphire     |
-| CPU      |      | Pink         |
-| Board    | 󰚗    | Peach        |
-| Memory   |      | Green        |
-| Disk     |      | Teal         |
-| Colors   | ●●●● | paleta full  |
+| Module | Icon | Color        |
+|--------|------|--------------|
+| OS     |      | Sapphire     |
+| CPU    |      | Pink         |
+| Board  | 󰚗    | Peach        |
+| Memory |      | Green        |
+| Disk   |      | Teal         |
+| Colors | ●●●● | full palette |
