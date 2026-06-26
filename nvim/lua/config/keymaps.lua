@@ -28,3 +28,6 @@ vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "Move right" })
 
 -- Markdown Preview
 keymap.set("n", "<leader>mr", "<cmd>MarkdownPreview<cr>", { desc = "Markdown Preview" })
+
+-- PHP: crear nueva clase con namespace correcto (phpactor)
+keymap.set("n", "<leader>pn", "<cmd>PhpactorClassNew<cr>", { desc = "PHP Nueva Clase (phpactor)" })
