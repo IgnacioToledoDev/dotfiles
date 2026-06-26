@@ -1,0 +1,24 @@
+{
+  "servers": [
+    {
+      "name": "prod",
+      "ssh_host": "45.55.23.110",
+      "ssh_port": "22",
+      "ssh_user": "deploy",
+      "ssh_key": "~/.ssh/prod_key.pem",
+      "db_type": "postgresql",
+      "db_name": "mydb",
+      "db_user": "admin",
+      "db_port": "5432",
+      "op_ref": "op://Private/prod-db/password"
+    },
+    {
+      "name": "local",
+      "db_type": "postgresql",
+      "db_name": "myapp_dev",
+      "db_user": "postgres",
+      "db_port": "5432",
+      "op_ref": "op://Private/local-db/password"
+    }
+  ]
+}
