@@ -19,6 +19,16 @@ fi
 ln -sf "$DOTFILES_DIR/settings.json" "$CLAUDE_DIR/settings.json"
 echo "  Linked settings.json"
 
+# Backup existing CLAUDE.md if it exists and isn't a symlink
+if [ -f "$CLAUDE_DIR/CLAUDE.md" ] && [ ! -L "$CLAUDE_DIR/CLAUDE.md" ]; then
+    cp "$CLAUDE_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md.bak"
+    echo "  Backed up CLAUDE.md → CLAUDE.md.bak"
+fi
+
+# Symlink CLAUDE.md (includes gentle-ai SDD/ODD orchestrator instructions)
+ln -sf "$DOTFILES_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+echo "  Linked CLAUDE.md"
+
 # Ensure hooks directory exists and symlink hook files
 mkdir -p "$CLAUDE_DIR/hooks"
 for hook in "$DOTFILES_DIR/hooks/"*; do
@@ -29,19 +39,52 @@ for hook in "$DOTFILES_DIR/hooks/"*; do
     fi
 done
 
+PLUGINS=(
+    "caveman@caveman"
+    "superpowers@claude-plugins-official"
+    "frontend-design@claude-plugins-official"
+    "atlassian@claude-plugins-official"
+    "code-review@claude-plugins-official"
+    "context7@claude-plugins-official"
+    "engram@engram"
+    "figma@claude-plugins-official"
+    "lua-lsp@claude-plugins-official"
+    "php-lsp@claude-plugins-official"
+    "redis-development@claude-plugins-official"
+    "rust-analyzer-lsp@claude-plugins-official"
+    "sentry@claude-plugins-official"
+    "shopify-ai-toolkit@claude-plugins-official"
+    "skill-creator@claude-plugins-official"
+    "sonarqube@claude-plugins-official"
+    "stripe@claude-plugins-official"
+)
+
 # Install Claude Code plugins (requires `claude` CLI in PATH)
 if command -v claude &>/dev/null; then
     echo ""
     echo "Installing plugins..."
-    claude plugins install caveman@caveman || echo "  caveman already installed or failed"
-    claude plugins install superpowers@claude-plugins-official || echo "  superpowers already installed or failed"
-    claude plugins install frontend-design@claude-plugins-official || echo "  frontend-design already installed or failed"
+    for plugin in "${PLUGINS[@]}"; do
+        claude plugins install "$plugin" || echo "  $plugin already installed or failed"
+    done
 else
     echo ""
     echo "claude CLI not found — install plugins manually:"
-    echo "  claude plugins install caveman@caveman"
-    echo "  claude plugins install superpowers@claude-plugins-official"
-    echo "  claude plugins install frontend-design@claude-plugins-official"
+    for plugin in "${PLUGINS[@]}"; do
+        echo "  claude plugins install $plugin"
+    done
+fi
+
+# gentle-ai CLI powers the SDD/ODD orchestrator hooks wired in settings.json
+# (sdd-preflight-hook, review stop-hook, telemetry, skill-registry refresh).
+if ! command -v gentle-ai &>/dev/null; then
+    echo ""
+    echo "WARNING: gentle-ai CLI not found in PATH."
+    echo "  settings.json hooks call it (PreToolUse/SessionStart/Stop/SubagentStop/UserPromptSubmit)."
+    echo "  See https://github.com/Gentleman-Programming for install instructions."
+fi
+if ! command -v codegraph &>/dev/null; then
+    echo ""
+    echo "WARNING: codegraph CLI not found in PATH (used by the UserPromptSubmit hook)."
 fi
 
 echo ""

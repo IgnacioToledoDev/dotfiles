@@ -1,10 +1,60 @@
 {
-  "permissions": {
-    "allow": [
-      "mcp__pencil"
-    ]
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": true,
+    "caveman@caveman": true,
+    "code-review@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "engram@engram": true,
+    "figma@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "redis-development@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "sentry@claude-plugins-official": true,
+    "shopify-ai-toolkit@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "sonarqube@claude-plugins-official": true,
+    "stripe@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "repo": "JuliusBrussee/caveman",
+        "source": "github"
+      }
+    },
+    "clean-architecture-skills": {
+      "source": {
+        "repo": "nathankim0/clean-architecture-skills",
+        "source": "github"
+      }
+    },
+    "engram": {
+      "source": {
+        "repo": "Gentleman-Programming/engram",
+        "source": "github"
+      }
+    }
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai sdd-preflight-hook --agent claude-code",
+            "timeout": 30,
+            "type": "command"
+          }
+        ],
+        "matcher": "Agent"
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
@@ -15,6 +65,52 @@
             "statusMessage": "Loading caveman mode..."
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai review stop-hook --agent claude-code",
+            "timeout": 30,
+            "type": "command"
+          }
+        ],
+        "matcher": "startup|resume|clear|compact"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai review stop-hook --agent claude-code",
+            "timeout": 60,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "gentle-ai telemetry runtime claude --json",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "gentle-ai telemetry runtime claude --json",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
       }
     ],
     "UserPromptSubmit": [
@@ -27,26 +123,66 @@
             "statusMessage": "Tracking caveman mode..."
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "codegraph prompt-hook",
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "gentle-ai skill-registry refresh --quiet --no-gitignore --cwd \"${CLAUDE_PROJECT_DIR:-$PWD}\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
       }
     ]
   },
+  "model": "sonnet",
+  "outputStyle": "Neutral",
+  "permissions": {
+    "allow": [
+      "mcp__pencil",
+      "mcp__codegraph__*"
+    ],
+    "defaultMode": "bypassPermissions",
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(sudo rm -rf ~)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Read(.ssh/*)",
+      "Edit(.ssh/*)",
+      "Read(.credentials/*)",
+      "Edit(.credentials/*)",
+      "Read(Library/Keychains/*)",
+      "Edit(Library/Keychains/*)",
+      "Read(.aws/credentials)",
+      "Edit(.aws/credentials)",
+      "Read(.config/gh/hosts.yml)",
+      "Edit(.config/gh/hosts.yml)",
+      "Read(**/*.pem)",
+      "Edit(**/*.pem)",
+      "Read(**/*.key)",
+      "Edit(**/*.key)",
+      "Read(**/secrets/*)",
+      "Edit(**/secrets/*)"
+    ]
+  },
+  "skipDangerousModePermissionPrompt": true,
   "statusLine": {
     "type": "command",
     "command": "bash \"$HOME/.claude/hooks/caveman-statusline.sh\""
   },
-  "enabledPlugins": {
-    "caveman@caveman": true,
-    "superpowers@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "caveman": {
-      "source": {
-        "source": "github",
-        "repo": "JuliusBrussee/caveman"
-      }
-    }
-  },
-  "skipDangerousModePermissionPrompt": true,
-  "theme": "dark"
+  "theme": "dark",
+  "tui": "fullscreen"
 }
