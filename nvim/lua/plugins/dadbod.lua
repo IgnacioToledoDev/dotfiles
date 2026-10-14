@@ -37,7 +37,7 @@ local function get_password_secrets(server_name)
   return secrets[server_name]
 end
 
--- Resolve password: try 1Password first, fall back to secrets file.
+-- Resolve password: try 1Password first, fall back to secrets file, then db_password field.
 local function resolve_password(server)
   if server.op_ref then
     local pass, err = get_password_op(server.op_ref)
@@ -49,6 +49,7 @@ local function resolve_password(server)
   end
   local pass = get_password_secrets(server.name)
   if pass then return pass end
+  if server.db_password and server.db_password ~= "" then return server.db_password end
   return nil
 end
 
@@ -101,17 +102,31 @@ local function start_tunnel(server, callback)
   vim.defer_fn(callback, 600)
 end
 
+-- Percent-encode a URI userinfo component (user or password).
+local function urlencode(s)
+  return (s:gsub("([^%w%-%.%_%~])", function(c)
+    return string.format("%%%02X", string.byte(c))
+  end))
+end
+
 -- Build dadbod URL and open DBUI for server.
 local function open_dbui(server, host, port, password)
-  local url = string.format(
-    "%s://%s:%s@%s:%s/%s",
-    server.db_type,
-    server.db_user,
-    password,
-    host,
-    port,
-    server.db_name
-  )
+  local url
+  if server.db_type == "redis" then
+    local auth = (password and password ~= "") and (":" .. urlencode(password) .. "@") or ""
+    local db_index = server.db_name or "0"
+    url = string.format("redis://%s%s:%s/%s", auth, host, port, db_index)
+  else
+    url = string.format(
+      "%s://%s:%s@%s:%s/%s",
+      server.db_type,
+      urlencode(server.db_user),
+      urlencode(password),
+      host,
+      port,
+      server.db_name
+    )
+  end
 
   local dbs = vim.g.dbs or {}
   if type(dbs) ~= "table" then dbs = {} end
@@ -127,7 +142,8 @@ end
 -- Resolve password then connect (with or without SSH tunnel).
 local function connect(server)
   local password = resolve_password(server)
-  if not password then
+  local no_auth_type = server.db_type == "redis"
+  if not password and not no_auth_type then
     vim.notify(
       "[dadbod] No password found for " .. server.name .. ". Set op_ref or add to .db-secrets.json.",
       vim.log.levels.ERROR
@@ -143,6 +159,47 @@ local function connect(server)
   else
     open_dbui(server, server.db_host or "127.0.0.1", server.db_port, password)
   end
+end
+
+-- Export current query buffer to ~/Downloads/{server}-{timestamp}.csv via psql COPY.
+local function export_query_to_csv()
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local query = vim.trim(table.concat(lines, '\n')):gsub(';+%s*$', '')
+
+  if query == '' then
+    vim.notify('[dadbod] Buffer vacío.', vim.log.levels.WARN)
+    return
+  end
+
+  local bufname = vim.fn.expand('%:t')
+  local server_name = bufname:match('^(.-)%-query%-')
+
+  local dbs = vim.g.dbs or {}
+  local url = server_name and type(dbs) == 'table' and dbs[server_name]
+
+  if not url then
+    vim.notify('[dadbod] Sin conexión activa para "' .. (server_name or '?') .. '". Conectá con <leader>dc primero.', vim.log.levels.ERROR)
+    return
+  end
+
+  local timestamp = os.date('%Y-%m-%d-%H-%M-%S')
+  local outfile = vim.fn.expand('~/Downloads/') .. (server_name or 'export') .. '-' .. timestamp .. '.csv'
+  local copy_query = 'COPY (' .. query .. ') TO STDOUT CSV HEADER'
+
+  vim.notify('[dadbod] Exportando CSV...', vim.log.levels.INFO)
+
+  local result = vim.fn.system({ 'psql', url, '-c', copy_query })
+
+  if vim.v.shell_error ~= 0 then
+    vim.notify('[dadbod] Error al exportar:\n' .. vim.trim(result), vim.log.levels.ERROR)
+    return
+  end
+
+  local out_lines = vim.split(result, '\n', { plain = true })
+  while out_lines[#out_lines] == '' do table.remove(out_lines) end
+
+  vim.fn.writefile(out_lines, outfile)
+  vim.notify('[dadbod] Guardado: ' .. outfile, vim.log.levels.INFO)
 end
 
 -- Open picker to choose a server from db-connections.json.
@@ -173,7 +230,8 @@ return {
   {
     "kristijanhusak/vim-dadbod-ui",
     keys = {
-      { "<leader>dc", pick_server, desc = "DB Connect (picker)" },
+      { "<leader>dc", pick_server,          desc = "DB Connect (picker)" },
+      { "<leader>de", export_query_to_csv,  desc = "DB Export CSV" },
     },
   },
   -- Attach VimLeavePre cleanup to vim-dadbod.

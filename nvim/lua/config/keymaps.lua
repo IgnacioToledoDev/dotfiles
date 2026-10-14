@@ -31,3 +31,6 @@ keymap.set("n", "<leader>mr", "<cmd>MarkdownPreview<cr>", { desc = "Markdown Pre
 
 -- PHP: crear nueva clase con namespace correcto (phpactor)
 keymap.set("n", "<leader>pn", "<cmd>PhpactorClassNew<cr>", { desc = "PHP Nueva Clase (phpactor)" })
+
+-- Noice: abrir historial de mensajes
+keymap.set("n", "<leader>N", "<cmd>Noice<cr>", { desc = "Noice" })
