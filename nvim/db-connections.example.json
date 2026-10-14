@@ -1,0 +1,25 @@
+{
+  "servers": [
+    {
+      "name": "local",
+      "db_type": "postgresql",
+      "db_host": "127.0.0.1",
+      "db_name": "myapp_dev",
+      "db_user": "postgres",
+      "db_port": "5432",
+      "op_ref": "op://Private/local-db/password"
+    },
+    {
+      "name": "remote-via-ssh",
+      "ssh_host": "example.com",
+      "ssh_port": "22",
+      "ssh_user": "deploy",
+      "ssh_key": "~/.ssh/id_ed25519",
+      "db_type": "postgresql",
+      "db_name": "mydb",
+      "db_user": "admin",
+      "db_port": "5432",
+      "op_ref": "op://Private/remote-db/password"
+    }
+  ]
+}

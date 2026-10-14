@@ -3,3 +3,9 @@ nvim/.db-secrets.json
 
 # Superpowers planning docs (generated, not for version control)
 nvim/docs/superpowers/
+
+# Local agent registry cache
+.atl/
+
+# Neovim DB connections (private, contains credentials). Copy from db-connections.example.json
+nvim/db-connections.json
