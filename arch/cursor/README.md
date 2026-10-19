@@ -4,7 +4,8 @@ Backups of cursor themes used on Arch (Omarchy / Hyprland).
 
 | Theme | Package | Notes |
 |---|---|---|
-| `catppuccin-mocha-dark-cursors` | `catppuccin-cursors-mocha` (AUR) | Current |
+| `Nordzy-cursors` | `nordzy-cursors` (AUR) | Current (dark) |
+| `catppuccin-mocha-dark-cursors` | `catppuccin-cursors-mocha` (AUR) | Previous |
 | `vimix-kanagawa-cursors-wave` | `vimix-kanagawa-cursors` (AUR) | Previous |
 | `Yaru` (cursors only) | `yaru-icon-theme` | Ubuntu cursor |
 
