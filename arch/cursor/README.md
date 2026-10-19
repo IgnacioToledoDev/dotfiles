@@ -5,6 +5,7 @@ Backups of cursor themes used on Arch (Omarchy / Hyprland).
 | Theme | Package | Notes |
 |---|---|---|
 | `Bibata-Modern-Classic` | `bibata-cursor-theme-bin` (AUR) | Liked (dark) |
+| `phinger-cursors-dark` | `phinger-cursors` (AUR) | Dark |
 | `Nordzy-cursors` | `nordzy-cursors` (AUR) | Dark |
 | `catppuccin-mocha-dark-cursors` | `catppuccin-cursors-mocha` (AUR) | Previous |
 | `vimix-kanagawa-cursors-wave` | `vimix-kanagawa-cursors` (AUR) | Previous |
